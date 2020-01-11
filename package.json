@@ -1,0 +1,35 @@
+{
+  "name": "lucianene.me",
+  "description": "My personal page.",
+  "version": "0.1.0",
+  "scripts": {
+    "prod": "cross-env NODE_ENV=production webpack",
+    "watch": "cross-env NODE_ENV=production webpack --progress --colors --watch"
+  },
+  "author": "Lucian Ene <lucianene@mail.com>",
+  "license": "MIT",
+  "homepage": "http://lucianene.me",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lucianene/lucianene.me.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lucianene/lucianene.me/issues"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.7.3",
+    "cross-env": "^6.0.3",
+    "css-loader": "^3.3.2",
+    "fastcss": "^0.1.2",
+    "file-loader": "^5.0.2",
+    "mini-css-extract-plugin": "^0.8.0",
+    "normalize.css": "^8.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-sort-media-queries": "^1.0.15",
+    "sass": "^1.23.7",
+    "sass-loader": "^8.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {}
+}
