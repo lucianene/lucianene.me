@@ -51,6 +51,11 @@ export default function HomePage() {
       percent: '100%'
     },
     {
+      label: 'Node.js',
+      icon: 'devicon-nodejs-plain',
+      percent: '75%'
+    },
+    {
       label: 'React.js',
       icon: 'devicon-react-plain',
       percent: '100%'
@@ -266,12 +271,12 @@ export default function HomePage() {
           </div>
           <div className="mv-30 fs-lg grey-text">
             <h3 className="mb-15">Software Development</h3>
-            <div className="fs-xl">
+            <div className="fs-md">
             {skills.map((item, index) => 
-              <div key={index} className="flex pv-5 hover:white-text" style={{ alignItems: 'center' }}>
-                <div className="flex" style={{ width: '25%' }}><i className={item.icon} /> <span className="fs-sm pl-10">{item.label}</span></div>
-                <div className="flex" style={{ width: '75%' }}>
-                  <div style={{ height: 5, width: item.percent }} className="blue-fill"></div>
+              <div key={index} className="row pb-5 hover:white-text" style={{ alignItems: 'center' }}>
+                <div className="xs:col-4"><i className={item.icon} /> <span className="fs-sm pl-10">{item.label}</span></div>
+                <div className="xs:col-8" style={{ width: '75%' }}>
+                  <div style={{ height: 5, width: item.percent }} className="blue-fill rad-3"></div>
                 </div>
               </div>
             )}
@@ -279,12 +284,12 @@ export default function HomePage() {
           </div>
           <div className="mv-30 fs-lg grey-text">
             <h3 className="mb-15">Tools</h3>
-            <div className="fs-xl">
+            <div className="fs-md">
             {tools.map((item, index) => 
-              <div key={index} className="flex pv-5 hover:white-text" style={{ alignItems: 'center' }}>
-                <div className="flex" style={{ width: '25%' }}><i className={item.icon} /> <span className="fs-sm pl-10">{item.label}</span></div>
-                <div className="flex" style={{ width: '75%' }}>
-                  <div style={{ height: 5, width: item.percent }} className="blue-fill"></div>
+              <div key={index} className="row pb-5 hover:white-text" style={{ alignItems: 'center' }}>
+                <div className="xs:col-4"><i className={item.icon} /> <span className="fs-sm pl-10">{item.label}</span></div>
+                <div className="xs:col-8">
+                  <div style={{ height: 5, width: item.percent }} className="red-fill"></div>
                 </div>
               </div>
             )}
