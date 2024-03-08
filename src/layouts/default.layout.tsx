@@ -21,7 +21,7 @@ export default function DefaultLayout({
   <div className="">
     <div className="container pv-20 animate__animated animate__fadeIn" style={{animationDuration: '3s', animationIterationCount: 1}}>
       <div className="row">
-        <div className="col-2 p-0 relative">
+        <div className="col-2 xs:hidden p-0 relative">
           <div className="side_menu">
             <ul className="text-right list-none">
               {[
@@ -37,7 +37,7 @@ export default function DefaultLayout({
             </ul>
           </div>
         </div>
-        <div className="col-10">
+        <div className="md:col-10 xs:col-12">
           <div>
             <div className="topbar group mb-30 flex" style={{justifyContent: "end", borderBottom: "1px solid #333"}}>
               <Link href="/" className="group-item grey-text:200 hover:blue-text p-10 ml-15 animate__animated animate__bounceIn" style={{animationDelay: "0.6s"}}>About</Link>

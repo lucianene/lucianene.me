@@ -177,7 +177,7 @@ export default function HomePage() {
   return (
     <main>
       <div id="about" className="row mb-50">
-        <div className="md:col-12">
+        <div className="xs:col-12">
           <div className="group group-vertical">
             <div className="group-item mt-15">
               <Image className="block mb-20 rad-50% w-128 animate__animated animate__bounceIn" width={128} height={128} src="https://avatars.githubusercontent.com/u/24269157?v=4" alt="Hi" title="Hi" />
@@ -240,7 +240,7 @@ export default function HomePage() {
       </div>
       {/*
       <div className="row mt-30">
-        <div className="md:col-12">
+        <div className="xs:col-12">
           <h2 id="projects" className="fs-xxl grey-text:200">Ideas</h2>
           <div className="mt-10 fs-lg grey-text">
             <ol>
@@ -256,7 +256,7 @@ export default function HomePage() {
       </div>
       */}
       <div className="row mt-30">
-        <div className="md:col-12">
+        <div className="xs:col-12">
           <h2 id="skills" className="fs-xxl grey-text:200">Skills</h2>
           <div className="pl-15 ml-15 mv-5 bl-2 blue-border:900 fs-sm">
             <ul>
@@ -299,7 +299,7 @@ export default function HomePage() {
         </div>
       </div>
       <div className="row mt-30">
-        <div className="md:col-12">
+        <div className="xs:col-12">
           <h2 id="projects" className="fs-xxl grey-text:200">Projects</h2>
           <div className="mt-10 fs-lg grey-text">
             <div className="red-text fs-xxl">@WIP</div>
@@ -307,7 +307,7 @@ export default function HomePage() {
         </div>
       </div>
       <div className="row mt-30">
-        <div className="md:col-12">
+        <div className="xs:col-12">
           <h2 id="articles" className="fs-xxl grey-text:200">Articles</h2>
           <div id="articles" className="mt-10 fs-lg">
             {articles.map((article, index) => <div key={index}>
