@@ -1,0 +1,137 @@
+$defaultConfig: (
+  'scaffolding': (
+    'normalize': false, // this will compile the vendor package normalize.css
+  ),
+
+  // Notice: the base setting is required
+  'typography': (
+    'google-fonts': (
+      // 'Roboto': (400, 600, 700),
+    ),
+    'font-family': (
+      'base': "Source Sans Pro",
+      'sans': "Source Sans Pro",
+      'serif': serif,
+      'mono': monospace,
+    ),
+    'font-size': (
+      'xs': .75rem,
+      'sm': .875rem,
+      'base': 16px,
+      'lg': 1.125rem,
+      'xl': 1.375em,
+      'xxl': 1.75em,
+      'hg': 2.875rem,
+    ),
+    'font-weight': (
+      400, 700
+    ),
+    'font-style': (
+      'normal', 'italic', 'oblique'
+    ),
+    'line-height': (
+      'xs': 1em,
+      'sm': 1.25em,
+      'base': 1.375,
+    ),
+    'word-spacing': (
+      'base': 0
+    ),
+    'letter-spacing': (
+      'base': 0
+    ),
+  ),
+
+  'box': (
+    // Change to false if you want to keep the units in class names.
+    // Percentages will not be striped.
+    'stripunits': true,
+    'padding': (0, 2px, 5px, 7px, 10px, 15px, 20px, 30px),
+    'margin': (0, auto, 5px, 10px, 15px, 20px, 30px, 50px),
+    'width': (25%, 50%, 100%, 128px),
+    'height': (100%),
+    'positions': (),
+    'z-indexe': (-1, 1, 2),
+    'border-radius': (3px, 5px, 50%),
+    'border-width': (0, 1px, 2px),
+
+    // Based on google's material shadows guide
+    'shadow': (
+      'none'
+    )
+  ),
+
+  'grid': (
+    'columns': 12,
+    'gutter':  30px,
+    'utilities': true,
+    'screens': (
+      'xs': 0,
+      'md': 800px,
+    )
+  ),
+
+  // Based on google's material colors system.
+  'colors': (
+    // This is the color palette, add as many as you need but remember, this will fatten your css file.
+    'palette': (
+      'transparent': transparent,
+      'black':       #000000,
+      'white':       #ffffff,
+      'grey':        #9E9E9E,
+      'lightgrey':   #D3D3D3,
+      'darkgrey':    #A9A9A9,
+      'dimgrey':     #696969,
+      'blue':        #6495ED,
+      'green':       #5cb85c,
+      'red':         #d9534f,
+      'orange':      #f0ad4e,
+      'bg:500':      #222222,
+    ),
+
+    // Control the lightness and the darnkess of the variants by providing positive and negative numbers.
+    'variants': (
+      '50':  88,
+      '100': 70,
+      '200': 50, // light variant
+      '300': 30,
+      '400': 15,
+      '500': 0, // base variant
+      '600': -9.25,
+      '700': -21, // dark variant
+      '800': -32,
+      '900': -52.5,
+    ),
+    'gradients': (
+      // 
+    )
+  ),
+
+  'utilities': (
+    'vertical-align': (
+      'initial', 'inherit', 'middle', 'super', 'sub', 'top', 'bottom', 'text-top', 'text-bottom'
+    ),
+    'cursor': (
+      'default', 'none', 'grab', 'grabbing', 'help', 'pointer', 'zoom-in', 'zoom-out'
+    ),
+    'list-style-type': (
+      'none', 'upper-roman', 'lower-roman', 'upper-latin', 'lower-latin', 'decimal', 'disc', 'circle', 'square'
+    ),
+    'text-decoration': (
+      'line-through', 'underline', 'none'
+    ),
+    'flexbox': (
+      'align-content': ('stretch', 'flex-start', 'flex-end', 'center', 'space-between', 'space-around'),
+      'align-items': ('flex-start', 'flex-end', 'center', 'baseline', 'stretch'),
+      'align-self': ('auto', 'flex-start', 'flex-end', 'center', 'baseline','stretch'),
+      'flex-basis': ('auto'),
+      'flex-direction': ('row', 'row-reverse', 'column', 'column-reverse'),
+      // 'flex-flow': (''),
+      'flex-grow': ('0', '1', '2'),
+      'flex-shrink': ('1', '0', '2'),
+      'flex-wrap': ('nowrap', 'wrap', 'wrap-reverse'),
+      'justify-content': ('flex-start', 'flex-end', 'center', 'space-between', 'space-around'),
+      'order': ('0', '1', '-1', '9')
+    )
+  )
+);

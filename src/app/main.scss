@@ -1,0 +1,51 @@
+// Import $defaultConfig
+@use 'config' as *;
+
+// Import fastcss with your configuration from a
+// separate file (from '_config.scss' in this example)
+@use 'fastcss' with ($config: $defaultConfig);
+
+html, body {
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+}
+body > div {
+    height: 100%;
+}
+.side_menu {
+    margin-top: 20rem;
+    position: fixed;
+    padding: 0;
+    font-size: .75rem;
+/*    background: red;*/
+}
+
+a {
+  color: fastcss.get-color('blue');
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+.topbar {
+  > a:hover {
+    text-decoration: none;
+    &:before {
+      content: '<';
+      position: absolute;
+      margin-left: -.6em;
+    }
+    &:after {
+      content: ' />';
+      position: absolute;
+      padding-left: 5px;
+    }
+  }
+}
