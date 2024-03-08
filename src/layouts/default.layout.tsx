@@ -21,7 +21,7 @@ export default function DefaultLayout({
   <div className="">
     <div className="container pv-20 animate__animated animate__fadeIn" style={{animationDuration: '3s', animationIterationCount: 1}}>
       <div className="row">
-        <div className="col-2 xs:hidden p-0 relative">
+        <div className="md:col-2 xs:hidden md:show p-0 relative">
           <div className="side_menu">
             <ul className="text-right list-none">
               {[
