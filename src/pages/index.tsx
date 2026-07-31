@@ -1,326 +1,408 @@
 import Image from "next/image";
-import styles from "./page.module.css";
-import Link from "next/link";
-import validator from 'validator'
 import DefaultLayout from "@/layouts/default.layout";
-import { ReactElement, useRef, useState } from "react"
-import JSConfetti from 'js-confetti'
+import { ReactElement, useEffect, useRef, useState } from "react"
 
-type ArticleListItem = {
-  link: any
+type SkillItem = {
   label: string
+  icon: string
+}
+
+type FlagshipProject = {
+  title: string
+  metric: string
+  metricLabel: string
+  subtitle?: string
+  link?: string
+  linkLabel?: string
+  bullets: string[]
+  tech: string[]
+}
+
+type CompactProject = {
+  title: string
+  note?: string
+  link?: string
+}
+
+const EMAIL_B64 = "ZW5lLmx1Y2lhbkBvdXRsb29rLmNvbQ=="
+const AVATAR_SRC = "https://avatars.githubusercontent.com/u/24269157?v=4"
+
+function decodeEmail() {
+  if (typeof window === "undefined") return ""
+  return window.atob(EMAIL_B64)
 }
 
 export default function HomePage() {
+  const [emailVisible, setEmailVisible] = useState(false)
+  const [emailAddress, setEmailAddress] = useState("")
+  const [copied, setCopied] = useState(false)
+  const [avatarOpen, setAvatarOpen] = useState(false)
+  const projectsRef = useRef<HTMLDivElement>(null)
 
-  const [ email, setEmail ] = useState("")
-  const [ resumeRequested, setResumeRequested ] = useState(false)
-  const resumeForm = useRef<HTMLFormElement>(null);
-
-  const articles: ArticleListItem[] = [
-    {link: "articles/why-i-use-sublime", label: "Why I use Sublime Text instead of IDEs like PHP Storm"},
-    {link: "#", label: "What is Fastcss and why I think is awesome"},
-    {link: "#", label: "Laravel vs Symfony from a senior php engineer's perspective"},
-    {link: "#", label: "Top Sublime Text 4 packages in 2023"},
-    {link: "#", label: "Working as a PFA in 2023 after government raises taxes doesn't add up"},
-    {link: "#", label: "My view on the Contractor versus Employee debate"},
-    {link: "#", label: "Why freelancing sucks"},
-    {link: "#", label: "Is Linux better than Windows for software development"},
-    {link: "#", label: "What tools I use as a php software engineer"},
+  const skills: SkillItem[] = [
+    { label: 'PHP', icon: 'devicon-php-plain' },
+    { label: 'Laravel', icon: 'devicon-laravel-plain' },
+    { label: 'Symfony', icon: 'devicon-symfony-plain' },
+    { label: 'Python (web & backend)', icon: 'devicon-python-plain' },
+    { label: 'TypeScript', icon: 'devicon-typescript-plain' },
+    { label: 'Vue.js', icon: 'devicon-vuejs-plain' },
+    { label: 'React / Next.js', icon: 'devicon-react-plain' },
+    { label: 'AWS', icon: 'devicon-amazonwebservices-plain-wordmark' },
+    { label: 'Docker', icon: 'devicon-docker-plain' },
+    { label: 'Architecture', icon: 'devicon-graphql-plain' },
+    { label: 'AI', icon: 'devicon-tensorflow-original' },
   ]
 
-  const skills: any[] = [
-    {
-      label: 'PHP',
-      icon: 'devicon-php-plain',
-      percent: '100%'
-    },
-    {
-      label: 'Laravel',
-      icon: 'devicon-laravel-plain',
-      percent: '100%'
-    },
-    {
-      label: 'Symfony',
-      icon: 'devicon-symfony-plain',
-      percent: '100%'
-    },
-    {
-      label: 'JavaScript',
-      icon: 'devicon-javascript-plain',
-      percent: '100%'
-    },
-    {
-      label: 'Node.js',
-      icon: 'devicon-nodejs-plain',
-      percent: '75%'
-    },
-    {
-      label: 'React.js',
-      icon: 'devicon-react-plain',
-      percent: '100%'
-    },
-    {
-      label: 'Next.js',
-      icon: 'devicon-nextjs-plain',
-      percent: '100%'
-    },
-    {
-      label: 'CSS3',
-      icon: 'devicon-css3-plain',
-      percent: '100%'
-    },
-    {
-      label: 'SASS',
-      icon: 'devicon-sass-plain',
-      percent: '100%'
-    },
-    {
-      label: 'Typescript',
-      icon: 'devicon-typescript-plain',
-      percent: '80%'
-    },
-    {
-      label: 'MySQL',
-      icon: 'devicon-mysql-plain',
-      percent: '85%'
-    },
-    {
-      label: 'MongoDB',
-      icon: 'devicon-mongodb-plain',
-      percent: '85%'
-    },
-    {
-      label: 'Bash',
-      icon: 'devicon-bash-plain',
-      percent: '50%'
-    },
-    {
-      label: 'Python',
-      icon: 'devicon-python-plain',
-      percent: '65%'
-    },
-    {
-      label: 'C++',
-      icon: 'devicon-cplusplus-plain',
-      percent: '30%'
-    },
+  const tools: SkillItem[] = [
+    { label: 'Linux', icon: 'devicon-linux-plain' },
+    { label: 'GitHub', icon: 'devicon-github-original' },
+    { label: 'Docker Compose', icon: 'devicon-docker-plain' },
+    { label: 'Jenkins', icon: 'devicon-jenkins-plain' },
+    { label: 'Auth0', icon: 'devicon-oauth-plain' },
+    { label: 'Swagger', icon: 'devicon-swagger-plain' },
   ]
 
-  const tools: any[] = [
+  const training: string[] = [
+    '365 lessons completed at Laracasts',
+    'PHP Unit Testing with PHPUnit — Udemy',
+    'The Complete Sass & SCSS Course — Udemy',
+    'AWS Concepts — Udemy',
+    'Getting Started with PHP 7 — Udemy',
+    'Object Oriented Programming (OOP) in PHP — Udemy',
+    'Learn and Understand NodeJS — Udemy',
+    'Advanced Javascript — Udemy',
+    'Learn Symfony 3 framework by practical examples — Udemy',
+    'PHP Security — Udemy',
+    'Programming Basics — Crystal Mind Academy',
+    'Web Designer — Crystal Mind Academy',
+  ]
+
+  const flagships: FlagshipProject[] = [
     {
-      label: 'Ubuntu Linux',
-      icon: 'devicon-ubuntu-plain',
-      percent: '90%'
+      title: 'Healthcare API',
+      metric: 'Secure REST',
+      metricLabel: 'Laravel · Swagger · RBAC',
+      subtitle: 'Freelance Contractor · May 2024',
+      bullets: [
+        'Led design and delivery of a scalable Laravel REST API for healthcare integrations.',
+        'Advanced validation, pagination, token auth, RBAC, and full Swagger documentation.',
+      ],
+      tech: ['Laravel', 'REST API', 'Swagger', 'PHP'],
     },
     {
-      label: 'Sublime Text 4',
-      icon: 'devicon-linux-plain',
-      percent: '100%'
+      title: 'MindGeek — Backoffice & Payments',
+      metric: '30 min → <5',
+      metricLabel: 'report generation',
+      subtitle: 'Performance & real-time payments',
+      bullets: [
+        'Redesigned a critical reporting query used in business-critical dashboards.',
+        'Built tools for real-time payment transaction data under high load.',
+      ],
+      tech: ['PHP', 'SQL', 'Performance', 'Payments'],
     },
     {
-      label: 'VIM',
-      icon: 'devicon-vim-plain',
-      percent: '15%',
-      description: 'Yeah, I know how to exit vim.'
+      title: 'Ford Dealership Car Configurator',
+      metric: 'Hours → minutes',
+      metricLabel: 'offer generation · team of 5',
+      subtitle: 'Bucharest · Team lead',
+      bullets: [
+        'Led a wizard-style configurator and backoffice for a major Romanian Ford dealership.',
+        'API-driven vehicle data, PDF offer packages, AWS + Docker delivery.',
+      ],
+      tech: ['Laravel', 'Vue.js', 'Docker', 'AWS'],
     },
     {
-      label: 'PHPStorm',
-      icon: 'devicon-phpstorm-plain',
-      percent: '70%'
+      title: 'Multi-Tenant Auth — Entrili',
+      metric: '5+ tenants',
+      metricLabel: 'OAuth · SAML · classic login',
+      subtitle: 'Belgium · SaaS platform',
+      bullets: [
+        'Tenant-aware authentication built on deep Symfony security customization.',
+        'Integrated Vue.js flows; Docker on AWS for local and production.',
+      ],
+      tech: ['Symfony', 'Vue.js', 'Docker', 'AWS'],
     },
     {
-      label: 'Artificial Intelligence',
-      icon: 'devicon-illustrator-plain',
-      percent: '75%'
+      title: 'OpenTalent — Platform & Tooling',
+      metric: 'Minutes, not hours',
+      metricLabel: 'local env bootstrap · multi-OS',
+      subtitle: 'Engineering Lead · Staff Engineer',
+      link: 'https://www.opentalent.co/',
+      linkLabel: 'opentalent.co',
+      bullets: [
+        'Built Python and Bash scripts plus Docker Compose so the team could spin up macOS, Linux, and Windows environments quickly.',
+        'Shipped AI resume analysis for hiring, with safeguards against prompt injection; also led Laravel API, React, and AWS delivery.',
+      ],
+      tech: ['Python', 'Bash', 'Docker', 'Laravel', 'React', 'AWS', 'AI'],
     },
     {
-      label: 'Guake terminal',
-      icon: 'devicon-linux-plain',
-      percent: '100%'
-    },
-    {
-      label: 'DBeaver',
-      icon: 'devicon-dbeaver-plain',
-      percent: '100%'
+      title: 'Fastcss',
+      metric: 'Open source',
+      metricLabel: 'config-driven CSS framework',
+      subtitle: 'Author & maintainer',
+      link: 'https://fastcss.org',
+      linkLabel: 'fastcss.org',
+      bullets: [
+        'SASS utility framework generating responsive color, type, spacing, flex, and grid helpers.',
+      ],
+      tech: ['SASS', 'CSS', 'Open Source'],
     },
   ]
 
-  const downloadResume = (e: any) => {
-    if (validator.isEmail(email)) {
-      e.preventDefault()
-      // resumeForm?.current?.submit(resumeForm?.current)
-      const jsConfetti = new JSConfetti()
-      jsConfetti.addConfetti()
+  const compactProjects: CompactProject[] = [
+    { title: 'Casautil Ecommerce', link: 'https://casautil.ro', note: 'Laravel + Fastcss' },
+    { title: 'eMAG UI KIT & UI BUNDLE', note: 'Symfony + Vue design system' },
+    { title: 'Symfony platform upgrades', note: '3.4 → 5.4 / PHP 8' },
+    { title: 'Jobs platform', note: 'One of the largest in Romania' },
+    { title: 'Casino backoffice', note: 'Operations tooling' },
+    { title: 'Inkydeals Ecommerce', link: 'https://inkydeals.com', note: 'inkydeals.com' },
+    { title: 'ARCoR', link: 'https://arcor.clubofrome.ro', note: 'arcor.clubofrome.ro' },
+    { title: 'Image search engine', note: 'Laravel 5' },
+  ]
 
-
-      // window.open('https://resume.io/r/hAxgBe7VX/download.pdf', 'formdownload', 'width=400,height=400,resizeable,scrollbars');
-      const submitWindow = window.open('', 'w1', 'width=400,height=400,resizeable,scrollbars');
-
-      // Assuming you have a form reference named `resumeForm`
-      const form: any = resumeForm.current;
-      if (form) {
-        form.setAttribute('target', 'w1');
-        form?.submit(); // Submit the form
-        // submitWindow?.close()
-      }
-      const downloadWindow = window.open("https://resume.io/r/hAxgBe7VX/download.pdf", "w2")
-      setEmail("")
-      setResumeRequested(true)
-      // downloadWindow?.close()
+  useEffect(() => {
+    const root = projectsRef.current
+    if (!root) return
+    const items = root.querySelectorAll('.project-flag')
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) {
+      items.forEach((el) => el.classList.add('is-inview'))
+      return
     }
-  }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-inview')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.2 }
+    )
+    items.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
 
-  const resumeFormSubmitted = (e: any) => {
-    e.preventDefault()
-    // window.open('', 'formpopup', 'width=400,height=400,resizeable,scrollbars');
-    // var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=400,height=300,left = 312,top = 234');
-    // e?.target = 'Popup_Window';
-    setEmail("")
+  useEffect(() => {
+    if (!avatarOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setAvatarOpen(false)
+    }
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    window.addEventListener("keydown", onKey)
+    return () => {
+      document.body.style.overflow = prevOverflow
+      window.removeEventListener("keydown", onKey)
+    }
+  }, [avatarOpen])
+
+  const revealEmail = async () => {
+    const address = decodeEmail()
+    setEmailAddress(address)
+    setEmailVisible(true)
+    try {
+      await navigator.clipboard.writeText(address)
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // clipboard may be unavailable; still reveal
+    }
   }
 
   return (
     <main>
-      <div id="about" className="row mb-50">
-        <div className="xs:col-12">
-          <div className="group group-vertical">
-            <div className="group-item mt-15">
-              <Image className="block mb-20 rad-50% w-128 animate__animated animate__bounceIn" width={128} height={128} src="https://avatars.githubusercontent.com/u/24269157?v=4" alt="Hi" title="Hi" />
-            </div>
-            <div className="group-item">
-              <h1 className="mt-20 fs-hg fw-700 grey-text:200">Hello, I&apos;m Lucian.</h1>
-            </div>
+      <section id="about" className="hero mb-50">
+        <div className="hero-enter">
+          <button
+            type="button"
+            className="avatar-trigger mb-20"
+            onClick={() => setAvatarOpen(true)}
+            aria-label="View larger photo"
+          >
+            <Image
+              className="block rad-50% w-128"
+              width={128}
+              height={128}
+              src={AVATAR_SRC}
+              alt="Lucian Ene"
+              title="Lucian Ene"
+            />
+          </button>
+          <h1 className="hero__name">Lucian Ene</h1>
+          <p className="hero__role">Engineering Lead · Staff Engineer · Full Stack</p>
+          <p className="hero__lede">
+            Based in Bucharest. I lead teams and ship durable systems across APIs, cloud infrastructure, and product delivery — with over 10 years in the stack.
+          </p>
+          <div className="hero__fastcss">
+            <a className="hero__fastcss-label no-decoration" href="https://fastcss.org" target="_blank" rel="noreferrer">
+              Author of Fastcss
+            </a>
+            <span className="hero__fastcss-demo">blue-text · flex · gap-12 · rad-3</span>
           </div>
-          <div className="mt-20 fs-xl">
-            I&apos;m a software developer based in Bucharest, Romania. I&apos;m the author of the css framework <a className="inline-block mh-5" target="_blank" href="https://github.com/fastcss/fastcss">Fastcss</a>.
-            You can find me on several social networks including
-            <a className="inline-block mh-5" target="_blank" href="https://www.linkedin.com/in/lucianene">LinkedIn</a>,
-            <a className="inline-block mh-5" target="_blank" href="https://github.com/lucianene">GitHub</a> and
-            <a className="inline-block mh-5" target="_blank" href="https://twitter.com/lucianene_">Twitter</a>.
-            <div className="mt-30 fs-lg">
-              <div className="">If you wanna say hi, here&apos;s my email: </div>
-              <svg width="300" height="30" viewBox="0 0 300 30" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-                <g transform="translate(0 0)">
-                  <text transform="translate(0 25)" fill="#9e9e9e" fontSize="18" fontFamily="Roboto-Regular,Roboto" ><tspan x="0" y="0">ene.lucian@outlook.com</tspan></text>
-                </g>
-              </svg>
-            </div>
-            {/*
-            <div className="mt-20 fs-lg ">
-              <div>Or maybe you want to book a meeting?</div>
-              - picker -
-            </div>
-            */}
-            <div className="mt-20 fs-lg ">
-              <div className="white-text">Request my resume: </div>
-              <div className="mt-5">
-                { !resumeRequested &&
-                <form ref={resumeForm} onSubmit={resumeFormSubmitted} action="https://formspree.io/f/meqykgod" className="flex" method="POST">
-                  <input 
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="pv-5 ph-10 rad-3 b-0 mr-5 dimgrey-fill:900 white-text" style={{outline: 0}}
-                    type="email"
-                    name="email"
-                    placeholder="Your email"
-                  />
-                  <button 
-                    disabled={!!!email} 
-                    onClick={downloadResume}
-                    className={
-                      "pv-5 ph-10 rad-3 b-0 white-text  fs-sm " +
-                      (!email ? 'grey-fill grey-text:200' : 'dimgrey-fill:800 hover:dimgrey-fill:700 active:dimgrey-fill:900 cursor-pointer')
-                    }>
-                    Send resume
+          <div className="hero__ctas">
+            <a
+              className="btn btn--primary"
+              href="https://www.linkedin.com/in/lucianene"
+              target="_blank"
+              rel="noreferrer"
+            >
+              LinkedIn
+            </a>
+            <a
+              className="btn btn--ghost"
+              href="https://github.com/lucianene"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub
+            </a>
+            {!emailVisible ? (
+              <button type="button" onClick={revealEmail} className="btn btn--ghost">
+                Show email
+              </button>
+            ) : (
+              <div className="flex items-center gap-8 fs-sm">
+                <span className="white-text">{emailAddress}</span>
+                {copied ? (
+                  <span className="green-text">Copied</span>
+                ) : (
+                  <button type="button" onClick={revealEmail} className="btn btn--ghost">
+                    Copy
                   </button>
-                </form>
-                  ||
-                <div className="fs-sm animate__animated animate__fadeIn">
-                Thank you for downloading my CV! I appreciate your interest in my professional background and skill set. If you have any questions, would like more information, or wish to discuss potential opportunities, please don&apos;t hesitate to get in touch. 
-                </div>
-                }
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/*
-      <div className="row mt-30">
-        <div className="xs:col-12">
-          <h2 id="projects" className="fs-xxl grey-text:200">Ideas</h2>
-          <div className="mt-10 fs-lg grey-text">
-            <ol>
-              <li>Add video introduction?</li>
-              <li>Use cheap server to host instead of github pages</li>
-              <li>Add photos to projects or make a photo gallery</li>
-              <li>Add analytics, including visitors counter</li>
-              <li>Add tech stack with icons maybe</li>
-              <li>Create a linkedin post after the portfolio is done</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-      */}
-      <div className="row mt-30">
-        <div className="xs:col-12">
-          <h2 id="skills" className="fs-xxl grey-text:200">Skills</h2>
-          <div className="pl-15 ml-15 mv-5 bl-2 blue-border:900 fs-sm">
-            <ul>
-              <li>15%: Basic Awareness. I am familiar with the basic concepts and have a foundational understanding. While I may need guidance to perform tasks, I have the ability to learn and apply new information in this area.</li>
-              <li>100%: Expert-level proficiency. I possess comprehensive knowledge and extensive experience, enabling me to innovate, solve complex problems, and lead projects or build solutions from conception to completion in this area.</li>
-            </ul>
-          </div>
-          <div className="mv-30 fs-lg grey-text">
-            <h3 className="mb-15">Software Development</h3>
-            <div className="fs-md">
-            {skills.map((item, index) => 
-              <div key={index} className="row pb-5 hover:white-text" style={{ alignItems: 'center' }}>
-                <div className="xs:col-4"><i className={item.icon} /> <span className="fs-sm pl-10">{item.label}</span></div>
-                <div className="xs:col-8" style={{ width: '75%' }}>
-                  <div style={{ height: 5, width: item.percent }} className="blue-fill rad-3"></div>
-                </div>
+                )}
               </div>
             )}
-            </div>
           </div>
-          <div className="mv-30 fs-lg grey-text">
-            <h3 className="mb-15">Tools</h3>
-            <div className="fs-md">
-            {tools.map((item, index) => 
-              <div key={index} className="row pb-5 hover:white-text" style={{ alignItems: 'center' }}>
-                <div className="xs:col-4"><i className={item.icon} /> <span className="fs-sm pl-10">{item.label}</span></div>
-                <div className="xs:col-8">
-                  <div style={{ height: 5, width: item.percent }} className="red-fill"></div>
-                </div>
+        </div>
+      </section>
+
+      {avatarOpen && (
+        <div
+          className="avatar-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Profile photo"
+          onClick={() => setAvatarOpen(false)}
+        >
+          <button
+            type="button"
+            className="avatar-modal__close"
+            onClick={() => setAvatarOpen(false)}
+            aria-label="Close"
+          >
+            ×
+          </button>
+          <div className="avatar-modal__content" onClick={(e) => e.stopPropagation()}>
+            <Image
+              src={AVATAR_SRC}
+              alt="Lucian Ene"
+              width={420}
+              height={420}
+              className="avatar-modal__image"
+              priority
+            />
+          </div>
+        </div>
+      )}
+
+      <section id="skills" className="mb-80">
+        <h2 className="section-title">Skills</h2>
+
+        <div className="mt-30">
+          <h3 className="mb-15 fs-lg grey-text:200">Software Development</h3>
+          <div className="flex flex-wrap gap-12">
+            {skills.map((item) =>
+              <div key={item.label} className="skill-chip">
+                <i className={`${item.icon} fs-lg`} />
+                <span>{item.label}</span>
               </div>
             )}
-            </div>
-          </div>
-          <div className="mv-30 fs-lg grey-text">
-            <h3 className="mb-15">Certifications</h3>
-            <div className="fs-sm">
-              @TODO: add files to download
-            </div>
           </div>
         </div>
-      </div>
-      <div className="row mt-30">
-        <div className="xs:col-12">
-          <h2 id="projects" className="fs-xxl grey-text:200">Projects</h2>
-          <div className="mt-10 fs-lg grey-text">
-            <div className="red-text fs-xxl">@WIP</div>
+
+        <div className="mt-30">
+          <h3 className="mb-15 fs-lg grey-text:200">Tools</h3>
+          <div className="flex flex-wrap gap-12">
+            {tools.map((item) =>
+              <div key={item.label} className="skill-chip">
+                <i className={`${item.icon} fs-lg`} />
+                <span>{item.label}</span>
+              </div>
+            )}
           </div>
         </div>
-      </div>
-      <div className="row mt-30">
-        <div className="xs:col-12">
-          <h2 id="articles" className="fs-xxl grey-text:200">Articles</h2>
-          <div id="articles" className="mt-10 fs-lg">
-            {articles.map((article, index) => <div key={index}>
-            <Link className="block mb-5" href={article.link}>{article.label}</Link>
-            </div>)}
-          </div>
+
+        <div className="mt-30">
+          <h3 className="mb-15 fs-lg grey-text:200">Professional Training</h3>
+          <p className="fs-sm grey-text:200 mb-15" style={{ maxWidth: '40rem', lineHeight: 1.55 }}>
+            Through these courses I built a strong foundation in PHP and OOP, then went deeper into testing with PHPUnit, application security, and the Symfony ecosystem. I strengthened frontend and full-stack craft with JavaScript, React, Vue, Python, Sass, and Node.js, picked up AWS fundamentals for cloud delivery, and keep sharpening day-to-day Laravel and modern PHP practice through Laracasts.
+          </p>
+          <ul className="fs-sm pl-20 grey-text:200">
+            {training.map((item) =>
+              <li key={item} className="pb-5">{item}</li>
+            )}
+          </ul>
         </div>
-      </div>
+      </section>
+
+      <section id="projects" className="mb-50">
+        <h2 className="section-title">Projects</h2>
+        <div className="mt-30" ref={projectsRef}>
+          {flagships.map((project) =>
+            <article key={project.title} className="project-flag">
+              <div className="project-flag__metric">
+                {project.metric}
+                <span className="project-flag__metric-label">{project.metricLabel}</span>
+              </div>
+              <div className="flex flex-wrap items-baseline justify-between gap-8">
+                <h3 className="project-flag__title">{project.title}</h3>
+                {project.link && (
+                  <a href={project.link} target="_blank" rel="noreferrer" className="fs-sm">
+                    {project.linkLabel ?? project.link}
+                  </a>
+                )}
+              </div>
+              {project.subtitle && (
+                <div className="mt-5 fs-sm grey-text:400">{project.subtitle}</div>
+              )}
+              <div className="project-flag__body">
+                <ul className="fs-sm pl-20 m-0">
+                  {project.bullets.map((bullet) =>
+                    <li key={bullet} className="pb-5 grey-text:200">{bullet}</li>
+                  )}
+                </ul>
+                <div className="mt-10 flex flex-wrap gap-8">
+                  {project.tech.map((tag) =>
+                    <span key={tag} className="fs-xs ph-10 pv-2 rad-3 blue-fill:900 white-text">
+                      {tag}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </article>
+          )}
+        </div>
+
+        <div className="mt-30 pt-20 bt-1 grey-border:900">
+          <h3 className="mb-15 fs-lg grey-text:200">Also shipped</h3>
+          <ul className="also-shipped">
+            {compactProjects.map((project) =>
+              <li key={project.title}>
+                <span className="also-shipped__title">{project.title}</span>
+                {project.link ? (
+                  <a className="also-shipped__note" href={project.link} target="_blank" rel="noreferrer">
+                    {project.note ?? project.link}
+                  </a>
+                ) : (
+                  project.note && <span className="also-shipped__note">{project.note}</span>
+                )}
+              </li>
+            )}
+          </ul>
+        </div>
+      </section>
     </main>
   )
 }

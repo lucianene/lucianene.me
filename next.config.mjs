@@ -1,19 +1,22 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // needed for html generation
-  sassOptions: {
-    includePaths: ['src/styles'],
+  output: 'export',
+  turbopack: {
+    root: __dirname,
   },
   images: {
     unoptimized: true,
-    domains: ['avatars.githubusercontent.com'],
-  },
-  webpack: config => {
-    config.resolve.fallback = {
-      fs: false,
-    };
-
-    return config;
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+      },
+    ],
   },
 };
 

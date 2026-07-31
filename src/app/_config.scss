@@ -1,63 +1,60 @@
 $defaultConfig: (
-  'scaffolding': (
-    'normalize': false, // this will compile the vendor package normalize.css
-  ),
-
-  // Notice: the base setting is required
   'typography': (
-    'google-fonts': (
-      // 'Roboto': (400, 600, 700),
-    ),
+    'google-fonts': (),
     'font-family': (
-      'base': "Source Sans Pro",
-      'sans': "Source Sans Pro",
+      'base': ("Source Sans 3", "Source Sans Pro", sans-serif),
+      'sans': ("Source Sans 3", "Source Sans Pro", sans-serif),
+      'display': ("Source Sans 3", "Source Sans Pro", sans-serif),
+      'mono': ("IBM Plex Mono", ui-monospace, monospace),
       'serif': serif,
-      'mono': monospace,
     ),
     'font-size': (
+      'xxs': .625rem,
       'xs': .75rem,
       'sm': .875rem,
       'base': 16px,
       'lg': 1.125rem,
-      'xl': 1.375em,
-      'xxl': 1.75em,
+      'xl': 1.375rem,
+      'xxl': 1.75rem,
       'hg': 2.875rem,
+      'display': clamp(2.75rem, 6vw, 4.5rem),
     ),
     'font-weight': (
-      400, 700
+      400, 600, 700, 800
     ),
     'font-style': (
-      'normal', 'italic', 'oblique'
+      normal, italic, oblique
     ),
     'line-height': (
+      '0': 0,
+      '1': 1,
       'xs': 1em,
       'sm': 1.25em,
       'base': 1.375,
+      'lg': 1.5,
     ),
     'word-spacing': (
       'base': 0
     ),
     'letter-spacing': (
-      'base': 0
+      'base': 0,
+      'tight': -0.03em,
+      'wide': 0.08em,
     ),
   ),
 
   'box': (
-    // Change to false if you want to keep the units in class names.
-    // Percentages will not be striped.
     'stripunits': true,
-    'padding': (0, 2px, 5px, 7px, 10px, 15px, 20px, 30px),
-    'margin': (0, auto, 5px, 10px, 15px, 20px, 30px, 50px),
-    'width': (25%, 50%, 100%, 128px),
-    'height': (100%),
+    'padding': (0, 2px, 5px, 7px, 10px, 15px, 20px, 30px, 40px, 60px),
+    'margin': (0, auto, 5px, 10px, 15px, 20px, 30px, 50px, 80px),
+    'width': (25%, 50%, 72px, 100%, 128px),
+    'height': (100%, 1px),
     'positions': (),
-    'z-indexe': (-1, 1, 2),
+    'z-index': (-1, 1, 2, 3),
     'border-radius': (3px, 5px, 50%),
     'border-width': (0, 1px, 2px),
-
-    // Based on google's material shadows guide
     'shadow': (
-      'none'
+      '0': "none",
     )
   ),
 
@@ -71,40 +68,35 @@ $defaultConfig: (
     )
   ),
 
-  // Based on google's material colors system.
   'colors': (
-    // This is the color palette, add as many as you need but remember, this will fatten your css file.
     'palette': (
       'transparent': transparent,
       'black':       #000000,
-      'white':       #ffffff,
-      'grey':        #9E9E9E,
-      'lightgrey':   #D3D3D3,
-      'darkgrey':    #A9A9A9,
-      'dimgrey':     #696969,
-      'blue':        #6495ED,
+      'white':       #F4F7FC,
+      'grey':        #8B95A8,
+      'lightgrey':   #C5CDD9,
+      'darkgrey':    #5C6575,
+      'dimgrey':     #3A4252,
+      'blue':        #6B9EFF,
       'green':       #5cb85c,
       'red':         #d9534f,
       'orange':      #f0ad4e,
-      'bg:500':      #222222,
+      'bg':          #0F1218,
+      'surface':     #161B24,
     ),
-
-    // Control the lightness and the darnkess of the variants by providing positive and negative numbers.
     'variants': (
       '50':  88,
       '100': 70,
-      '200': 50, // light variant
+      '200': 50,
       '300': 30,
       '400': 15,
-      '500': 0, // base variant
+      '500': 0,
       '600': -9.25,
-      '700': -21, // dark variant
+      '700': -21,
       '800': -32,
       '900': -52.5,
     ),
-    'gradients': (
-      // 
-    )
+    'gradients': ()
   ),
 
   'utilities': (
@@ -121,17 +113,90 @@ $defaultConfig: (
       'line-through', 'underline', 'none'
     ),
     'flexbox': (
-      'align-content': ('stretch', 'flex-start', 'flex-end', 'center', 'space-between', 'space-around'),
-      'align-items': ('flex-start', 'flex-end', 'center', 'baseline', 'stretch'),
-      'align-self': ('auto', 'flex-start', 'flex-end', 'center', 'baseline','stretch'),
-      'flex-basis': ('auto'),
-      'flex-direction': ('row', 'row-reverse', 'column', 'column-reverse'),
-      // 'flex-flow': (''),
-      'flex-grow': ('0', '1', '2'),
-      'flex-shrink': ('1', '0', '2'),
-      'flex-wrap': ('nowrap', 'wrap', 'wrap-reverse'),
-      'justify-content': ('flex-start', 'flex-end', 'center', 'space-between', 'space-around'),
-      'order': ('0', '1', '-1', '9')
+      'align-content': (
+        'stretch': stretch,
+        'start':   flex-start,
+        'end':     flex-end,
+        'center':  center,
+        'between': space-between,
+        'around':  space-around,
+        'evenly':  space-evenly,
+      ),
+      'align-items': (
+        'start':    flex-start,
+        'end':      flex-end,
+        'center':   center,
+        'baseline': baseline,
+        'stretch':  stretch,
+      ),
+      'align-self': (
+        'auto':     auto,
+        'start':    flex-start,
+        'end':      flex-end,
+        'center':   center,
+        'baseline': baseline,
+        'stretch':  stretch,
+      ),
+      'flex-basis': (
+        'auto': auto,
+        'full': 100%,
+        '0':    0,
+      ),
+      'flex-direction': (
+        'row':         row,
+        'row-reverse': row-reverse,
+        'col':         column,
+        'col-reverse': column-reverse,
+      ),
+      'flex-grow': (
+        '0': 0,
+        '1': 1,
+        '2': 2,
+      ),
+      'flex-shrink': (
+        '0': 0,
+        '1': 1,
+        '2': 2,
+      ),
+      'flex-wrap': (
+        'nowrap':       nowrap,
+        'wrap':         wrap,
+        'wrap-reverse': wrap-reverse,
+      ),
+      'justify-content': (
+        'start':   flex-start,
+        'end':     flex-end,
+        'center':  center,
+        'between': space-between,
+        'around':  space-around,
+        'evenly':  space-evenly,
+      ),
+      'order': (
+        '0':     0,
+        '1':     1,
+        'neg-1': -1,
+        '9':     9,
+      ),
+      'gap': (
+        '0':  0,
+        '8':  8px,
+        '12': 12px,
+        '16': 16px,
+        '20': 20px,
+        '24': 24px,
+      ),
+      'row-gap': (
+        '0':  0,
+        '8':  8px,
+        '12': 12px,
+        '16': 16px,
+      ),
+      'column-gap': (
+        '0':  0,
+        '8':  8px,
+        '12': 12px,
+        '16': 16px,
+      ),
     )
   )
 );

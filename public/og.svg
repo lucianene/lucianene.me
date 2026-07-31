@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Lucian Ene">
+  <defs>
+    <radialGradient id="g" cx="20%" cy="0%" r="70%">
+      <stop offset="0%" stop-color="#6B9EFF" stop-opacity="0.28"/>
+      <stop offset="55%" stop-color="#0F1218" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#6B9EFF" stroke-opacity="0.08" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#0F1218"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <text x="80" y="250" font-family="Source Sans 3, Arial, sans-serif" font-size="88" font-weight="700" fill="#F4F7FC">Lucian Ene</text>
+  <text x="80" y="320" font-family="Source Sans 3, Arial, sans-serif" font-size="32" font-weight="600" fill="#6B9EFF">Engineering Lead · Staff Engineer · Full Stack</text>
+  <text x="80" y="420" font-family="IBM Plex Mono, monospace" font-size="28" fill="#8B95A8">Author of Fastcss · lucianene.me</text>
+  <rect x="80" y="460" width="120" height="4" fill="#6B9EFF"/>
+</svg>
