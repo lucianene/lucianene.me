@@ -244,6 +244,14 @@ export default function HomePage() {
           <div className="hero__ctas">
             <a
               className="btn btn--primary"
+              href="https://calendly.com/lucianene/30min"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Book a call
+            </a>
+            <a
+              className="btn btn--ghost"
               href="https://www.linkedin.com/in/lucianene"
               target="_blank"
               rel="noreferrer"
