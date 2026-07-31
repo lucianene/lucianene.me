@@ -17,7 +17,7 @@ export default function DefaultLayout({
       if (clickingRef.current) return;
 
       const marker = window.innerHeight * 0.28;
-      let crossed = SECTIONS[0];
+      let crossed: (typeof SECTIONS)[number] = SECTIONS[0];
       for (const id of SECTIONS) {
         const el = document.getElementById(id);
         if (!el) continue;
