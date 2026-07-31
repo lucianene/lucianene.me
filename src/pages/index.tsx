@@ -79,12 +79,25 @@ export default function HomePage() {
 
   const flagships: FlagshipProject[] = [
     {
+      title: 'OpenTalent',
+      metric: '15 min → ~3',
+      metricLabel: 'deploy time · team of 5',
+      subtitle: 'Engineering Lead & Staff Engineer · May 2025 — Present',
+      link: 'https://www.opentalent.co/',
+      linkLabel: 'opentalent.co',
+      bullets: [
+        'Took over post-acquisition with a team of 5: architecture, security, GraphQL cleanup, Auth0, and AWS (EC2, RDS, S3, Amplify).',
+        'Led Laravel API and React delivery, multi-country launch, AI resume analysis with prompt-injection defenses, plus Python/Bash Docker tooling for fast multi-OS local setups.',
+      ],
+      tech: ['Laravel', 'React', 'Python', 'Docker', 'AWS', 'Auth0', 'GraphQL', 'AI'],
+    },
+    {
       title: 'Healthcare API',
       metric: 'Secure REST',
       metricLabel: 'Laravel · Swagger · RBAC',
-      subtitle: 'Freelance Contractor · May 2024',
+      subtitle: 'Technical Lead · end-to-end ownership · May 2024',
       bullets: [
-        'Led design and delivery of a scalable Laravel REST API for healthcare integrations.',
+        'Owned the project end-to-end: designed and delivered a scalable Laravel REST API for healthcare integrations.',
         'Advanced validation, pagination, token auth, RBAC, and full Swagger documentation.',
       ],
       tech: ['Laravel', 'REST API', 'Swagger', 'PHP'],
@@ -121,19 +134,6 @@ export default function HomePage() {
         'Integrated Vue.js flows; Docker on AWS for local and production.',
       ],
       tech: ['Symfony', 'Vue.js', 'Docker', 'AWS'],
-    },
-    {
-      title: 'OpenTalent — Platform & Tooling',
-      metric: 'Minutes, not hours',
-      metricLabel: 'local env bootstrap · multi-OS',
-      subtitle: 'Engineering Lead · Staff Engineer',
-      link: 'https://www.opentalent.co/',
-      linkLabel: 'opentalent.co',
-      bullets: [
-        'Built Python and Bash scripts plus Docker Compose so the team could spin up macOS, Linux, and Windows environments quickly.',
-        'Shipped AI resume analysis for hiring, with safeguards against prompt injection; also led Laravel API, React, and AWS delivery.',
-      ],
-      tech: ['Python', 'Bash', 'Docker', 'Laravel', 'React', 'AWS', 'AI'],
     },
     {
       title: 'Fastcss',
