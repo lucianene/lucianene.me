@@ -50,7 +50,7 @@ export default function HomePage() {
     { label: 'AWS', icon: 'devicon-amazonwebservices-plain-wordmark' },
     { label: 'Docker', icon: 'devicon-docker-plain' },
     { label: 'Architecture', icon: 'devicon-graphql-plain' },
-    { label: 'AI', icon: 'devicon-tensorflow-original' },
+    { label: 'AI agents & LLM tooling', icon: 'devicon-tensorflow-original' },
   ]
 
   const tools: SkillItem[] = [
@@ -60,6 +60,15 @@ export default function HomePage() {
     { label: 'Jenkins', icon: 'devicon-jenkins-plain' },
     { label: 'Auth0', icon: 'devicon-oauth-plain' },
     { label: 'Swagger', icon: 'devicon-swagger-plain' },
+  ]
+
+  const aiTools: SkillItem[] = [
+    { label: 'Cursor', icon: 'devicon-vscode-plain' },
+    { label: 'Claude Code', icon: 'devicon-bash-plain' },
+    { label: 'GitHub Copilot', icon: 'devicon-github-original' },
+    { label: 'OpenAI Codex', icon: 'devicon-nodejs-plain' },
+    { label: 'Agent mode / multi-file edits', icon: 'devicon-graphql-plain' },
+    { label: 'Editor Skills & rules', icon: 'devicon-markdown-original' },
   ]
 
   const training: string[] = [
@@ -334,6 +343,21 @@ export default function HomePage() {
           <h3 className="mb-15 fs-lg grey-text:200">Tools</h3>
           <div className="flex flex-wrap gap-12">
             {tools.map((item) =>
+              <div key={item.label} className="skill-chip">
+                <i className={`${item.icon} fs-lg`} />
+                <span>{item.label}</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="mt-30">
+          <h3 className="mb-15 fs-lg grey-text:200">AI editors & agents</h3>
+          <p className="fs-sm grey-text:200 mb-15" style={{ maxWidth: '42rem', lineHeight: 1.55 }}>
+            I ship with the 2026 AI coding stack day to day: Cursor as the AI-native editor, Claude Code for terminal-first agents on harder refactors, plus GitHub Copilot and Codex where they fit. I write and use editor Skills, rules, and agent workflows so the tools follow project conventions — not just one-off chat prompts.
+          </p>
+          <div className="flex flex-wrap gap-12">
+            {aiTools.map((item) =>
               <div key={item.label} className="skill-chip">
                 <i className={`${item.icon} fs-lg`} />
                 <span>{item.label}</span>
