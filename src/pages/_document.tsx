@@ -1,4 +1,11 @@
 import { Html, Head, Main, NextScript } from 'next/document'
+import {
+  OG_IMAGE,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_URL,
+} from '@/lib/seo'
 
 export default function Document() {
   return (
@@ -6,17 +13,25 @@ export default function Document() {
       <Head>
         <meta charSet="UTF-8" />
         <meta name="theme-color" content="#0F1218" />
+        <meta name="color-scheme" content="dark" />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Lucian Ene" />
-        <meta property="og:title" content="Lucian Ene — Engineering Lead & Staff Engineer" />
-        <meta property="og:description" content="Engineering Lead, Staff Engineer and Full Stack developer based in Bucharest. Author of Fastcss." />
-        <meta property="og:url" content="https://lucianene.me" />
-        <meta property="og:image" content="https://lucianene.me/og.svg" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:site_name" content={SITE_NAME} />
+        <meta property="og:title" content={SITE_TITLE} />
+        <meta property="og:description" content={SITE_DESCRIPTION} />
+        <meta property="og:url" content={SITE_URL} />
+        <meta property="og:image" content={OG_IMAGE} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={SITE_TITLE} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Lucian Ene — Engineering Lead & Staff Engineer" />
-        <meta name="twitter:description" content="Engineering Lead, Staff Engineer and Full Stack developer based in Bucharest. Author of Fastcss." />
-        <meta name="twitter:image" content="https://lucianene.me/og.svg" />
+        <meta name="twitter:title" content={SITE_TITLE} />
+        <meta name="twitter:description" content={SITE_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE} />
+        <meta name="twitter:image:alt" content={SITE_TITLE} />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet" />

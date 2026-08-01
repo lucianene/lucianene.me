@@ -263,7 +263,7 @@ export default function HomePage() {
               className="btn btn--ghost"
               href="https://www.linkedin.com/in/lucianene"
               target="_blank"
-              rel="noreferrer"
+              rel="me noreferrer"
             >
               LinkedIn
             </a>
@@ -271,7 +271,7 @@ export default function HomePage() {
               className="btn btn--ghost"
               href="https://github.com/lucianene"
               target="_blank"
-              rel="noreferrer"
+              rel="me noreferrer"
             >
               GitHub
             </a>

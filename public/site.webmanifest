@@ -1,0 +1,22 @@
+{
+  "name": "Lucian Ene",
+  "short_name": "Lucian Ene",
+  "description": "Engineering Lead, Staff Engineer and Full Stack developer based in Bucharest. Author of Fastcss.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F1218",
+  "theme_color": "#0F1218",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
