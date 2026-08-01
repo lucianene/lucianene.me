@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app';
 import React, { Fragment } from 'react';
 import Head from 'next/head';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 import {
   personJsonLd,
   SITE_DESCRIPTION,
@@ -34,6 +35,7 @@ export default function MyApp({ Component, pageProps }: AppProps & { Component: 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </Head>
+      <GoogleAnalytics />
       <Layout>
         {getLayout(
           <Component {...pageProps} />
