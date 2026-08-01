@@ -32,7 +32,7 @@ export const personJsonLd = {
   "@type": "Person",
   name: "Lucian Ene",
   url: SITE_URL,
-  image: "https://avatars.githubusercontent.com/u/24269157?v=4",
+  image: `${SITE_URL}/lucian-ene.png`,
   jobTitle: "Engineering Lead & Staff Engineer",
   description: SITE_DESCRIPTION,
   address: {

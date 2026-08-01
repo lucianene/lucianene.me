@@ -25,7 +25,7 @@ type CompactProject = {
 }
 
 const EMAIL_B64 = "ZW5lLmx1Y2lhbkBvdXRsb29rLmNvbQ=="
-const AVATAR_SRC = "https://avatars.githubusercontent.com/u/24269157?v=4"
+const AVATAR_SRC = "/lucian-ene.png"
 
 function decodeEmail() {
   if (typeof window === "undefined") return ""
