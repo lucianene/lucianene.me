@@ -91,7 +91,7 @@ export default function HomePage() {
       title: 'OpenTalent',
       metric: '15 min → ~3',
       metricLabel: 'deploy time · team of 5',
-      subtitle: 'Engineering Lead & Staff Engineer · May 2025 — Present',
+      subtitle: 'HeadFirst · Engineering Lead & Staff Engineer · May 2025 — Jul 2026',
       link: 'https://www.opentalent.co/',
       linkLabel: 'opentalent.co',
       bullets: [
@@ -166,7 +166,7 @@ export default function HomePage() {
     { title: 'Casino backoffice', note: 'Operations tooling' },
     { title: 'Inkydeals Ecommerce', link: 'https://inkydeals.com', note: 'inkydeals.com' },
     { title: 'ARCoR', link: 'https://arcor.clubofrome.ro', note: 'arcor.clubofrome.ro' },
-    { title: 'Image search engine', note: 'Laravel 5' },
+    { title: 'Image search engine', note: 'GoLang · Laravel' },
   ]
 
   useEffect(() => {
