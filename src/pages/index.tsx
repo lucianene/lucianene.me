@@ -32,6 +32,76 @@ function decodeEmail() {
   return window.atob(EMAIL_B64)
 }
 
+function SkillMark({ name }: { name: string }) {
+  const common = {
+    className: "skill-chip__mark",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.6,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true as const,
+  }
+
+  switch (name) {
+    case "architecture":
+      return (
+        <svg {...common}>
+          <path d="M12 3 20 7.5 12 12 4 7.5 12 3Z" />
+          <path d="M4 12 12 16.5 20 12" />
+          <path d="M4 16.5 12 21 20 16.5" />
+        </svg>
+      )
+    case "ai":
+      return (
+        <svg {...common}>
+          <path d="M12 3.2 13.7 9 19.6 10.4 13.7 11.8 12 17.6 10.3 11.8 4.4 10.4 10.3 9 12 3.2Z" />
+          <path d="M18 15.2 18.8 17.5 21.2 18.2 18.8 18.9 18 21.2 17.2 18.9 14.8 18.2 17.2 17.5 18 15.2Z" />
+        </svg>
+      )
+    case "cursor":
+      return (
+        <svg {...common}>
+          <path d="M12 3v18" />
+          <path d="M8 3h8" />
+          <path d="M8 21h8" />
+        </svg>
+      )
+    case "claude":
+      return (
+        <svg {...common}>
+          <rect x="3" y="4" width="18" height="16" rx="2" />
+          <path d="M7 10 10 13 7 16" />
+          <path d="M12 16h5" />
+        </svg>
+      )
+    case "codex":
+      return (
+        <svg {...common}>
+          <path d="M9 7 4.5 12 9 17" />
+          <path d="M15 7 19.5 12 15 17" />
+        </svg>
+      )
+    case "agent":
+      return (
+        <svg {...common}>
+          <rect x="8" y="7" width="12" height="13" rx="1.5" />
+          <path d="M5 16.5V5.5A1.5 1.5 0 0 1 6.5 4H16" />
+        </svg>
+      )
+    default:
+      return null
+  }
+}
+
+function SkillIcon({ icon }: { icon: string }) {
+  if (icon.startsWith("mark:")) {
+    return <SkillMark name={icon.slice(5)} />
+  }
+  return <i className={`${icon} fs-lg`} aria-hidden="true" />
+}
+
 export default function HomePage() {
   const [emailVisible, setEmailVisible] = useState(false)
   const [emailAddress, setEmailAddress] = useState("")
@@ -49,8 +119,8 @@ export default function HomePage() {
     { label: 'React / Next.js', icon: 'devicon-react-plain' },
     { label: 'AWS', icon: 'devicon-amazonwebservices-plain-wordmark' },
     { label: 'Docker', icon: 'devicon-docker-plain' },
-    { label: 'Architecture', icon: 'devicon-graphql-plain' },
-    { label: 'AI agents & LLM tooling', icon: 'devicon-tensorflow-original' },
+    { label: 'Architecture', icon: 'mark:architecture' },
+    { label: 'AI agents & LLM tooling', icon: 'mark:ai' },
   ]
 
   const tools: SkillItem[] = [
@@ -63,11 +133,11 @@ export default function HomePage() {
   ]
 
   const aiTools: SkillItem[] = [
-    { label: 'Cursor', icon: 'devicon-vscode-plain' },
-    { label: 'Claude Code', icon: 'devicon-bash-plain' },
+    { label: 'Cursor', icon: 'mark:cursor' },
+    { label: 'Claude Code', icon: 'mark:claude' },
     { label: 'GitHub Copilot', icon: 'devicon-github-original' },
-    { label: 'OpenAI Codex', icon: 'devicon-nodejs-plain' },
-    { label: 'Agent mode / multi-file edits', icon: 'devicon-graphql-plain' },
+    { label: 'OpenAI Codex', icon: 'mark:codex' },
+    { label: 'Agent mode / multi-file edits', icon: 'mark:agent' },
     { label: 'Editor Skills & rules', icon: 'devicon-markdown-original' },
   ]
 
@@ -89,7 +159,7 @@ export default function HomePage() {
   const flagships: FlagshipProject[] = [
     {
       title: 'OpenTalent',
-      metric: '15 min → ~3',
+      metric: '15 min → ~3 min',
       metricLabel: 'deploy time · team of 5',
       subtitle: 'HeadFirst · Engineering Lead & Staff Engineer · May 2025 — Jul 2026',
       link: 'https://www.opentalent.co/',
@@ -237,6 +307,9 @@ export default function HomePage() {
               src={AVATAR_SRC}
               alt="Lucian Ene"
               title="Lucian Ene"
+              priority
+              loading="eager"
+              fetchPriority="high"
             />
           </button>
           <h1 className="hero__name">Lucian Ene</h1>
@@ -318,7 +391,6 @@ export default function HomePage() {
               width={420}
               height={420}
               className="avatar-modal__image"
-              priority
             />
           </div>
         </div>
@@ -332,7 +404,7 @@ export default function HomePage() {
           <div className="flex flex-wrap gap-12">
             {skills.map((item) =>
               <div key={item.label} className="skill-chip">
-                <i className={`${item.icon} fs-lg`} />
+                <SkillIcon icon={item.icon} />
                 <span>{item.label}</span>
               </div>
             )}
@@ -344,7 +416,7 @@ export default function HomePage() {
           <div className="flex flex-wrap gap-12">
             {tools.map((item) =>
               <div key={item.label} className="skill-chip">
-                <i className={`${item.icon} fs-lg`} />
+                <SkillIcon icon={item.icon} />
                 <span>{item.label}</span>
               </div>
             )}
@@ -359,7 +431,7 @@ export default function HomePage() {
           <div className="flex flex-wrap gap-12">
             {aiTools.map((item) =>
               <div key={item.label} className="skill-chip">
-                <i className={`${item.icon} fs-lg`} />
+                <SkillIcon icon={item.icon} />
                 <span>{item.label}</span>
               </div>
             )}
